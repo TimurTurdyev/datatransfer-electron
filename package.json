@@ -20,5 +20,7 @@
     "electron": "^14.0.1",
     "electron-packager": "^15.4.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
