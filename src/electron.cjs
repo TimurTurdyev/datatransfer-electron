@@ -1,5 +1,5 @@
 const windowStateManager = require('electron-window-state');
-const {app, BrowserWindow} = require('electron');
+const {app, BrowserWindow, ipcMain} = require('electron');
 const {join} = require('path');
 const contextMenu = require('electron-context-menu');
 const serve = require('electron-serve');
@@ -93,3 +93,12 @@ function loadVite(port) {
 app.once('ready', createWindow);
 app.on('activate', () => !mainWindow ? createWindow() : null);
 app.on('window-all-closed', () => process.platform !== 'darwin' ? app.quit() : null);
+
+// Form handle
+ipcMain.on('login', (event, data) => {
+    console.log(data);
+});
+
+ipcMain.handle('login', (event, data) => {
+    return false;
+});
