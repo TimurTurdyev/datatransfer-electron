@@ -19,7 +19,7 @@ function createWindow() {
     })
 
     // and load the index.html of the app.
-    mainWindow.loadFile('index.html')
+    mainWindow.loadFile('index.html').catch(console.log);
 
     // Open the DevTools.
     if (!app.isPackaged) mainWindow.webContents.openDevTools()
