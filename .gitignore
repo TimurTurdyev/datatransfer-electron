@@ -1,3 +1,9 @@
-node_modules
-.idea
-.github
+# Including dirs
+node_modules/
+.idea/
+.github/
+.svelte-kit/
+.svelte/
+build/
+dist/
+*.local

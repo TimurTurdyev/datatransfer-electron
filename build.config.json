@@ -1,0 +1,14 @@
+{
+  "appId": "ru.waviot.datatransfer",
+  "productName": "Data Transfer",
+  "directories": {
+    "output": "dist"
+  },
+  "files": [
+    "src/electron.cjs",
+    {
+      "from": "build",
+      "to": ""
+    }
+  ]
+}
