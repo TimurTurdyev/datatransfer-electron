@@ -13,7 +13,7 @@ try {
 
 // Configure serve dep
 const serveURL = serve({directory: '.'});
-const port = process.env.PORT || 7929;
+const port = process.env.PORT || 3000;
 const dev = !app.isPackaged;
 
 // Main window holder and initialize function
@@ -27,7 +27,6 @@ function createWindow() {
     // Creating window
     mainWindow = new BrowserWindow({
         backgroundColor: 'whitesmoke',
-        titleBarStyle: 'hidden',
         autoHideMenuBar: true,
         minWidth: 900,
         minHeight: 700,
@@ -38,7 +37,8 @@ function createWindow() {
             contextIsolation: true,
             nodeIntegration: true,
             spellcheck: false,
-            devTools: dev
+            devTools: dev,
+            nativeWindowOpen: true
         },
         x: mainWindowState.x,
         y: mainWindowState.y,
