@@ -32,7 +32,7 @@ function createWindow() {
         minHeight: 700,
         icon: join(__dirname, 'static', 'icon.ico'),
         webPreferences: {
-            preload: join(__dirname, 'preload.cjs'),
+            preload: join(__dirname, 'preload.сjs'),
             enableRemoteModule: true,
             contextIsolation: true,
             nodeIntegration: true,
