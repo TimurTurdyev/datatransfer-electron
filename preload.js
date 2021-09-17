@@ -1,17 +1,22 @@
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
 
-const ipcRenderer = require('electron').ipcRenderer;
+const {ipcRenderer, contextBridge} = require('electron');
+
+contextBridge.exposeInMainWorld('backApi', {
+  send: (channel, args) => ipcRenderer.send('submitForm', {}),
+  on: (channel, handler) => ipcRenderer.on(channel, handler)
+  // TODO: methods
+});
 
 window.addEventListener('DOMContentLoaded', () => {
   document.querySelector('form').addEventListener('submit', function (event) {
     event.preventDefault()
 
-    ipcRenderer.send('submitForm', {})
+    window.backApi.send('submitForm', {})
   })
 })
 
-ipcRenderer.on('message', (event, data) => {
-  console.log(data)
-})
-
+window.backApi.on('submitForm', (event, data) => {
+  console.log(data);
+});
