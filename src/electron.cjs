@@ -3,6 +3,7 @@ const {app, BrowserWindow, ipcMain} = require('electron');
 const {join} = require('path');
 const contextMenu = require('electron-context-menu');
 const serve = require('electron-serve');
+const request = require('request');
 
 // Trying to use electron-reloader
 try {
@@ -18,6 +19,7 @@ const dev = !app.isPackaged;
 
 // Main window holder and initialize function
 let mainWindow;
+
 function createWindow() {
     const mainWindowState = windowStateManager({
         defaultWidth: 1280,
@@ -59,7 +61,7 @@ function createWindow() {
         mainWindow = null;
     });
 
-    if(dev) loadVite(port);
+    if (dev) loadVite(port);
     else serveURL(mainWindow);
 }
 
@@ -99,6 +101,29 @@ ipcMain.on('login', (event, data) => {
     console.log(data);
 });
 
-ipcMain.handle('login', (event, data) => {
-    return false;
+ipcMain.handle('login', async (event, data) => {
+    return await postLogin(data)
 });
+
+function postLogin(query) {
+    // console.log(query)
+    return new Promise((resolve, reject) => {
+        request.post(
+            'https://auth.waviot.ru/?action=user-login&true_api=1',
+            {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Content-Type': 'application/json',
+                },
+                json: query
+            },
+            (error, response, body) => {
+                if (!error && response.statusCode === 200) {
+                    console.log(body)
+                    return resolve(true)
+                }
+                return resolve(false)
+            }
+        )
+    })
+}
