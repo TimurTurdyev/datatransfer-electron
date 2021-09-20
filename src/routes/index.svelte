@@ -33,7 +33,7 @@
                 <div id="emailHelp" class="form-text">Введите Ваш логин в системе WAVIoT</div>
             </div>
             <div class="mb-3">
-                <label for="password" class="form-label">Email</label>
+                <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="password" bind:value={formData.password}>
             </div>
             <button type="submit" class="btn btn-primary">Войти</button>
